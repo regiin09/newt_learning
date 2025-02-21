@@ -1,0 +1,50 @@
+Section 3 - Creating and Modifying Tables
+
+Creating actor Table
+
+CREATE TABLE actors (
+	actor_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(150),
+	last_name VARCHAR(150) NOT NULL,
+	gender CHAR(1),
+	date_of_birth DATE,
+	add_date DATE,
+	update_date DATE
+);
+
+
+CREATE TABLE directors (
+	director_id SERIAL PRIMARY KEY,
+	first_name VARCHAR(150),
+	last_name VARCHAR(150),
+	date_of_birth DATE,
+	nationality VARCHAR(20),
+	add_date DATE,
+	update_date DATE
+	);
+
+
+--Create table with references, ie. foreign key
+
+
+in constrains section foreign key can be seen
+
+CREATE TABLE movie_revenues(
+	revenue_id SERIAL PRIMARY KEY,
+	movie_id INT REFERENCES movies(movie_id),
+	revenue_domestic NUMERIC(10,2), --10 digit + 2 decimal
+	revenue_international NUMERIC(10,2)
+);
+
+
+--Junction table
+CREATE TABLE movies_actor(
+	movie_id INT REFERENCES movies (movie_id),
+	actor_id INT REFERENCES actors (actor_id),
+	PRIMARY KEY(movie_id,actor_id)
+);
+
+SELECT * FROM movies_actor;
+
+
+
